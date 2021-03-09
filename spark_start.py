@@ -18,5 +18,5 @@ spark
 
 
 
-num = spark.sparkContext.textFile("file:///C:/Users/BhandariP/OneDrive - Vodafone Group/Desktop/Important.txt").count()
+num = spark.sparkContext.textFile("Important.txt").count()
 print(num)

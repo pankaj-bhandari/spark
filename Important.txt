@@ -1,0 +1,192 @@
+Impetus
+
+1.  after what data size, you will choose Hadoop over the traditional systems
+https://www.qubole.com/blog/hadoop-vs-traditional/
+
+2.  How to improve rdbms queries
+https://www.ibm.com/support/knowledgecenter/en/SSZLC2_9.0.0/com.ibm.commerce.developer.doc/refs/rsdperformanceworkspaces.htm
+https://www.sqlshack.com/query-optimization-techniques-in-sql-server-tips-and-tricks/
+https://dzone.com/articles/7-simple-tips-to-boost-the-performance-of-your-sql
+https://www.sisense.com/blog/8-ways-fine-tune-sql-queries-production-databases/
+https://www.sqlshack.com/query-optimization-techniques-in-sql-server-the-basics/
+https://solutioncenter.apexsql.com/how-to-create-and-optimize-sql-server-indexes-for-better-performance/
+
+3.  how and when to create indexes
+https://www.sqlserverlogexplorer.com/index-optimization-best-practices/
+http://www.sql-server-performance.com/index-data-structures/
+
+4.  join on string and it is impacting the performance, how to improve it now. Can we convert string into int and use it to improve performance
+https://dev.mysql.com/doc/refman/5.5/en/optimize-character.html
+
+5.  how join order helps in improving performance.
+https://www.mssqltips.com/sqlservertutorial/3201/how-join-order-can-affect-the-query-plan/
+https://bertwagner.com/2017/11/21/does-the-join-order-of-my-tables-matter/
+https://stackoverflow.com/questions/16360860/does-sql-join-order-affect-performance
+
+6.  how to get millisessions upto 6 digits.
+SQL Server 2008 has much more precision available. The datetime2 type will accurately store values like this: 2008-12-19 09:31:38.5670514 (accuracy to 100 nanoseconds).
+https://stackoverflow.com/questions/19025192/convert-varchar-to-datetime-in-sql-which-is-having-millisec
+
+7.  what is mapreduce
+https://data-flair.training/blogs/hadoop-mapreduce-tutorial/
+https://data-flair.training/blogs/how-hadoop-mapreduce-works/
+
+
+8.  what is the flow of mapreduce for word count
+https://data-flair.training/blogs/mapreduce-interview-questions-and-answers/
+https://data-flair.training/forums/topic/sequence-of-execution-of-map-reduce-recordreader-split-combiner-partitioner/
+https://data-flair.training/forums/topic/output-of-mapper-or-partitioner-written-on-local-disk/
+https://data-flair.training/forums/topic/does-partitioner-run-in-its-own-jvm-or-shares-with-another-process/
+
+
+9.  what is hdfs block, logical blocks and map reduce uses it. overall process
+https://data-flair.training/blogs/mapreduce-inputsplit-vs-block-hadoop/
+
+10. how Hadoop decide no of mapper's for processing
+https://stackoverflow.com/questions/30549261/split-size-vs-block-size-in-hadoop
+
+11. which queue decide no of mapper's are available
+12. how logical split created by Hadoop and what does it contain
+13. what are different input formats for mapper and what are key & value in different formats
+14. overall process of word count program in map reduce
+15. where does mapper output store and how it is become input for reducer
+16. how and when shuffling and sorting works during map reduce phase
+17. how can I make 1 output file even if we have multiple reducers
+https://data-flair.training/forums/topic/how-to-get-single-file-as-the-output-from-mapreduce-job
+
+18. can Hadoop automatically combine multiple small file into 1 big file(combiner input format)
+19. write word count program in spark
+
+val textFile = sc.textFile("input_file_name_with_path")
+val count = textFile.flatMap(line => line.split(" ")).map(word => (word,1)).reduceByKey(_ + _)
+count.saveAsTextFile("output_file_name_with_path")
+
+https://stackoverflow.com/questions/44126296/what-is-the-meaning-for-reducebykey
+
+20. Benefits of spark over Hadoop and when we should use it over Hadoop
+21. what is map/flat map in dataframe
+https://github.com/vaquarkhan/Apache-Kafka-poc-and-notes/wiki/Difference-between-flatMap()-and-map()-on-an-RDD
+https://data-flair.training/blogs/apache-spark-map-vs-flatmap/
+
+
+22. what i/o reduced in spark over Hadoop
+23. from where reducer get output(from hdfs or from memory)
+24. what is buffer space
+https://data-flair.training/forums/topic/explain-the-process-of-spilling-in-mapreduce
+
+
+25. what is lazy execution and what are advantages of it
+28. what is the use of optimizer and named all
+29. what are spark UI stages(count or map reduce), how it is defined
+https://techvidvan.com/tutorials/apache-spark-stage/
+
+30. how it is defined in hive
+31. how spark skips a particular stage
+32. Python array, I want to split an array in 2 parts
+33. hive joins(map side & reduce side). what others
+https://acadgild.com/blog/map-side-joins-in-hive
+SELECT /*+ MAPJOIN(dataset2_bucketed) */ dataset1_bucketed.first_name,dataset1_bucketed.eid, dataset2_bucketed.eid FROM dataset1_bucketed JOIN dataset2_bucketed ON dataset1_bucketed.first_name = dataset2_bucketed.first_name ;
+
+34. how can I guess how many reduces will run in hive join based on table size
+# reducers = (# bytes of input to mappers)
+             / (hive.exec.reducers.bytes.per.reducer)
+
+default hive.exec.reducers.bytes.per.reducer is 1G.
+1GB (1000000000 bytes)
+hive -e "set hive.exec.reducers.bytes.per.reducer=1000000"
+
+
+35. java class with few columns(col1, col2, col3 ...) and we have list of 1 million objects. Now I want to sort based on col3. how I can do it.
+36. what is difference between list & set
+37. what is insertion order of list & set
+38. what is github, conflicts
+39. what is availability zone and does an S3 object is replicated across availability zone or not.
+https://cloudacademy.com/blog/aws-regions-and-availability-zones-the-simplest-explanation-you-will-ever-find-around/
+Data stored on an S3 bucket inside a region is replicated across multiple servers, enabling high data availability on a region level. 
+If there are issues on a region level, your data will be unavailable, and your app that uses S3 storage might experience downtime.
+In order to prevent such unexpected downtime for your business critical applications, 
+you can use an Amazon S3 feature called Cross-Region Replication.
+
+Cross-region replication is a feature that enables automatic and asynchronous copy of your data from one destination bucket to another destination 
+bucket located in one of the other AWS regions. Once you enable cross-region replication, every object uploaded to a particular S3 bucket is 
+automatically replicated into a predefined destination bucket in another AWS region.
+
+40. what is data centers
+https://www.techopedia.com/definition/349/data-center
+
+Data centers are simply centralized locations where computing and networking equipment is concentrated for the purpose of collecting, storing, 
+processing, distributing or allowing access to large amounts of data. 
+They have existed in one form or another since the advent of computers.
+
+a large group of networked computer servers typically used by organizations for the remote storage, processing, 
+or distribution of large amounts of data.
+
+a data center is a physical facility that organizations use to house their critical applications and data. 
+A data center's design is based on a network of computing and storage resources that enable the delivery of shared applications and data.
+
+41. why S3 bucket name is unique across the world.
+
+This is because every object in a bucket can be directly accessed using an end endpoint which contains the S3 bucket name. 
+That is the reason names should be unique globally. However, the data is neither replicated nor stored in different regions.
+
+
+42. what is the strategy of server scale up and down
+
+
+
+http://geoinsyssoft.com/2016/08/26/hive-interview-questions-answers/
+https://www.justanalytics.com/blog/technical-know-how/apache-hive-memory-management-tuning
+
+
+
+
+
+
+43. Can you design kafka archetecture for smapi project or some other project
+44. Have you ever faced issues about the data count is not matching or some records dropped. Data may be lost either in kafka, stream-set or while writting into hdfs. How you checked where exactly records dropped and what process you are follow in order to analyse the issue.
+45. I have 200 GB of data and have to find who is responsible for data loss. can you please tell how you will solve the issue.
+46. Do you maintain logs of the files ingested and where 
+47. Can you please write a spark program to read a json file and save it in CSV. File should have 2 specific columns
+48. JAKSON library in scala
+49. Suppose some job failed, how will you debug. Where you go to check the logs. exact log location where spark create logs. Yarn logs
+50. What is your hadoop server configuration. no of data nodes, RAM, cores
+51. When you do spark submit jobs, what configuration you  provide. How you deside no of executers required for a job.
+52. lets say someone have ran spark job with wrong parameters and job got failed. How you will correct it. suppose hdfs raw data is 200 GB.
+53. We have a daily partitioned hive table and for a particular partition is not showing data, but we have verified that partions hdfs location is having data. what will you do to solve this issue.
+54. What does invalidate & msck commands do in hive.
+55. what AWS services you have worked.
+56. output of Python program.
+57. hive optimization techniques
+58. have you used bucketing & vectarization
+
+
+
+Cybage
+
+59. What is kafka. Can you explain it's archetecture
+60. What operations you have performed in pyspark.
+61. What is the most complex KPI or task, you have done in spark
+62. What is the advantages of using parquet file format.
+63. Do you know scala
+64. When should we use scala or python
+65. What AWS services you have used
+66. What are the alternatives of Data pipeline in AWS
+67. What are the key considerations while creating EMR.
+68. What are the different types of cluster's available.
+69. what is Atheana and how you used in your project.
+70. What is it build or based on what. (it is based on presto, developed by facebook)
+
+
+71. Purpose of the POC for predective QA
+72. Can you please give example of 1 complex API from smapi project
+73. spark query for 
+
+L & T
+default partition in hive
+incremental sqoop
+python collection sorting
+how to read file and filter based on specific word
+basic unix scriping
+how to read multiline json in spark
+how to change hive execution engine
+

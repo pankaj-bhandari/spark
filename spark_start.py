@@ -15,3 +15,8 @@ import pyspark
 from pyspark.sql import SparkSession
 spark=SparkSession.builder.getOrCreate()
 spark
+
+
+
+num = spark.sparkContext.textFile("file:///C:/Users/BhandariP/OneDrive - Vodafone Group/Desktop/Important.txt").count()
+print(num)
